@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "Name": "Columbia"
+  },
+  {
+    "Id": 2,
+    "Name": "Black Diamond"
+  },
+  {
+    "Id": 3,
+    "Name": "The North Face"
+  },
+  {
+    "Id": 4,
+    "Name": "Spyder"
+  },
+  {
+    "Id": 5,
+    "Name": "Patagonia"
+  },
+  {
+    "Id": 6,
+    "Name": "Obermeyer"
+  }
+]
