@@ -39,9 +39,12 @@ namespace API.Controllers
         }
 
        [HttpGet]
-       public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(){
-         var spec = new ProductsWithTypesAndBrandsSpecification();
+       public async Task<ActionResult<IReadOnlyList<Pagination<ProductToReturnDto>>>> GetProducts([FromQuery] ProductSpecParams productParams){
+         var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
          var products= await _productRepo.ListAsync(spec);
+         var coutSpec = new ProductWithFiltersForCountSpecification(productParams);
+         var totalItems =  await _productRepo.CountAsync(coutSpec);
+         var data =_mapper.Map<IReadOnlyList< Product>, IReadOnlyList<ProductToReturnDto>>(products);
         //  return products.Select(product => new ProductToReturnDto{
         //           Id = product.Id,
         //           Name= product.Name,
@@ -51,7 +54,7 @@ namespace API.Controllers
         //           ProductBrand = product.ProductBrand.Name,
         //           ProductType = product.ProductType.Name
         //    }).ToList();
-        return Ok(_mapper.Map<IReadOnlyList< Product>, IReadOnlyList<ProductToReturnDto>>(products));
+        return Ok(new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
        }
 
        [HttpGet("{id}")]
