@@ -45,15 +45,6 @@ namespace API.Controllers
          var coutSpec = new ProductWithFiltersForCountSpecification(productParams);
          var totalItems =  await _productRepo.CountAsync(coutSpec);
          var data =_mapper.Map<IReadOnlyList< Product>, IReadOnlyList<ProductToReturnDto>>(products);
-        //  return products.Select(product => new ProductToReturnDto{
-        //           Id = product.Id,
-        //           Name= product.Name,
-        //           Description = product.Description,
-        //           PictureUrl = product.PictureUrl,
-        //           Price =  product.Price,
-        //           ProductBrand = product.ProductBrand.Name,
-        //           ProductType = product.ProductType.Name
-        //    }).ToList();
         return Ok(new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
        }
 
@@ -65,16 +56,8 @@ namespace API.Controllers
            var spec = new ProductsWithTypesAndBrandsSpecification(id);
            var product =  await _productRepo.GetEntityWithSpec(spec);
            if(product == null ) return NotFound(new ApiResponse(404));
-        //    return new ProductToReturnDto{
-        //           Id = product.Id,
-        //           Name= product.Name,
-        //           Description = product.Description,
-        //           PictureUrl = product.PictureUrl,
-        //           Price =  product.Price,
-        //           ProductBrand = product.ProductBrand.Name,
-        //           ProductType = product.ProductType.Name
-        //    };
-         return _mapper.Map<Product, ProductToReturnDto>(product);
+
+           return _mapper.Map<Product, ProductToReturnDto>(product);
        }
 
        [HttpGet("brands")]
