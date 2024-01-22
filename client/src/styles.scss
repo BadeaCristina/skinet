@@ -2,3 +2,16 @@
 
 /* Importing Bootstrap SCSS file. */
 @import "../../node_modules/bootstrap/scss/bootstrap";
+
+.xng-breadcrumb-root{
+    padding: 8px 16px;
+    display: inline;
+    border-radius: 0;
+}
+label.xng-breadcrumb-trail{
+    margin-bottom: 0;
+    color: orange;
+}
+.xng-breadcrumb-separator{
+    padding: 0 0 ;
+}
